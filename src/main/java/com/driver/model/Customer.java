@@ -11,15 +11,15 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId ;
-    private String mobile ;
-    private String password ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int customerId;
+
+    private String mobile;
+    private String password;
 
 
-    //Customer is  also parent wrt tripBooking
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private List<TripBooking> tripBookingList = new ArrayList<>() ;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    List<TripBooking> tripBookingList = new ArrayList<>();
 
     public Customer(int customerId, String mobile, String password, List<TripBooking> tripBookingList) {
         this.customerId = customerId;
@@ -36,21 +36,21 @@ public class Customer {
         this.tripBookingList = tripBookingList;
     }
 
-    public Customer() {
-    }
-
-    public Customer(int id, String mobile, String password) {
-        this.customerId = id;
+    public Customer(int customerId, String mobile, String password) {
+        this.customerId = customerId;
         this.mobile = mobile;
         this.password = password;
     }
 
-    public int getId() {
+    public Customer() {
+    }
+
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setId(int id) {
-        this.customerId = id;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getMobile() {
