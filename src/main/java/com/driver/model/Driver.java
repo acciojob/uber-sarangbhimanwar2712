@@ -15,11 +15,11 @@ public class Driver {
 
 
     //Driver is parent wrt cab
-    @OneToOne
+    @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
     private Cab cab ;
 
     //Driver is parent wrt tripBooking
-    @OneToMany
+    @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
     private List<TripBooking> tripBookingList = new ArrayList<>() ;
 
     public Cab getCab() {

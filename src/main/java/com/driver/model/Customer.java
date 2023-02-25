@@ -18,7 +18,7 @@ public class Customer {
 
 
     //Customer is  also parent wrt tripBooking
-    @OneToMany
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<TripBooking> tripBookingList = new ArrayList<>() ;
 
 
