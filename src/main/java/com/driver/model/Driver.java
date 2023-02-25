@@ -14,8 +14,9 @@ public class Driver {
     private String password ;
 
 
-    //Driver is parent wrt cab
-    @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
+    //Driver is child wrt cab
+    @OneToOne
+    @JoinColumn
     private Cab cab ;
 
     //Driver is parent wrt tripBooking
@@ -45,6 +46,14 @@ public class Driver {
         this.id = id;
         this.mobileNo = mobileNo;
         this.password = password;
+    }
+
+    public Driver(int id, String mobileNo, String password, Cab cab, List<TripBooking> tripBookingList) {
+        this.id = id;
+        this.mobileNo = mobileNo;
+        this.password = password;
+        this.cab = cab;
+        this.tripBookingList = tripBookingList;
     }
 
     public Driver(String mobileNo, String password) {

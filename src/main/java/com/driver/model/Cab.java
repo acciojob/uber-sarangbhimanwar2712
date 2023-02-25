@@ -9,13 +9,12 @@ public class Cab {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
-    private int ratePerKm ;
+    private int perKmRate ;
     private boolean available ;
 
 
-    //Cab is child wrt to driver
-    @OneToOne
-    @JoinColumn
+    //Cab is parent wrt to driver
+    @OneToOne(mappedBy = "cab",cascade = CascadeType.ALL)
     private Driver driver ;
 
 
@@ -27,12 +26,16 @@ public class Cab {
         this.driver = driver;
     }
 
+    public Cab(int perKmRate) {
+        this.perKmRate = perKmRate;
+    }
+
     public Cab() {
     }
 
-    public Cab(int id, int ratePerKm, boolean available) {
+    public Cab(int id, int perKmRate, boolean available) {
         this.id = id;
-        this.ratePerKm = ratePerKm;
+        this.perKmRate = perKmRate;
         this.available = available;
     }
 
@@ -44,15 +47,15 @@ public class Cab {
         this.id = id;
     }
 
-    public int getRatePerKm() {
-        return ratePerKm;
+    public int getPerKmRate() {
+        return perKmRate;
     }
 
-    public void setRatePerKm(int ratePerKm) {
-        this.ratePerKm = ratePerKm;
+    public void setPerKmRate(int perKmRate) {
+        this.perKmRate = perKmRate;
     }
 
-    public boolean isAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 
