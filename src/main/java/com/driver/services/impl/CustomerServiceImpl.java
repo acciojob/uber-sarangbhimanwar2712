@@ -30,30 +30,40 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void register(Customer customer) {
 		//Save the customer in database
+		customerRepository2.save(customer) ;
 	}
 
 	@Override
 	public void deleteCustomer(Integer customerId) {
 		// Delete customer without using deleteById function
 
+		customerRepository2.deleteById(customerId);
 	}
 
 	@Override
 	public TripBooking bookTrip(int customerId, String fromLocation, String toLocation, int distanceInKm) throws Exception{
 		//Book the driver with lowest driverId who is free (cab available variable is Boolean.TRUE). If no driver is available, throw "No cab available!" exception
 		//Avoid using SQL query
+		TripBooking tripBooking = tripBookingRepository2.findById(customerId).get() ;
+		tripBooking.setFromLocation(fromLocation);
+		tripBooking.setToLcation(toLocation);
+		tripBooking.setDistanceInKm(distanceInKm);
+		tripBooking.setTripStatus(TripStatus.CONFIRMED);
 
+		return tripBooking ;
 	}
 
 	@Override
 	public void cancelTrip(Integer tripId){
 		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
-
+		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get() ;
+		tripBooking.setTripStatus(TripStatus.CANCELED);
 	}
 
 	@Override
 	public void completeTrip(Integer tripId){
 		//Complete the trip having given trip Id and update TripBooking attributes accordingly
-
+		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get() ;
+		tripBooking.setTripStatus(TripStatus.COMPLETED);
 	}
 }
